@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CloudBox Converter — fast, simple image conversion." />
+  <title>CloudBox Converter — Image conversion made simple</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="Project.css" />
+
+  <!-- PDF Library -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+
+  <!-- DOCX Library -->
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+
+</head>
+
+<body>
+
+
+  <div class="app-shell">
+
+    <header class="topbar">
+
+      <a class="brand" href="#" aria-label="CloudBox Converter home">
+
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.2 18.2h10.1a4.2 4.2 0 0 0 .5-8.4A5.9 5.9 0 0 0 6.4 8.4a4.9 4.9 0 0 0 .8 9.8Z"/>
+            <path d="m9 13 3-3 3 3M12 10v7"/>
+          </svg>
+        </span>
+
+        <span>CloudBox<span class="brand-light"> Converter</span></span>
+
+      </a>
+
+      <nav class="nav-links">
+        <a class="active" href="#converter">Converter</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+
+      <div class="topbar-right">
+        <span class="status-dot"></span>
+        <span>Image tools</span>
+      </div>
+
+    </header>
+
+
+    <main>
+
+      <!-- HERO SECTION -->
+
+      <section class="hero">
+
+        <div class="eyebrow">
+          <span class="eyebrow-icon">✦</span>
+          SIMPLE. FAST. CLOUD-POWERED.
+        </div>
+
+        <h1>Every format.<br><span>One simple place.</span></h1>
+
+        <p class="hero-copy">
+          Convert your images in seconds. Choose a format, upload your files,
+          and get a crisp result ready to download.
+        </p>
+
+        <div class="trust-row">
+          <span>✓ No sign-up required</span>
+          <span>✓ Simple workflow</span>
+          <span>✓ Quality-focused</span>
+        </div>
+
+      </section>
+
+
+      <!-- CONVERTER SECTION -->
+
+      <section class="workspace" id="converter">
+
+        <div class="workspace-heading">
+
+          <div>
+            <p class="section-kicker">IMAGE & DOCUMENT CONVERTER</p>
+            <h2>Convert your files</h2>
+          </div>
+
+          <span class="secure-label">
+            <svg viewBox="0 0 20 20">
+              <path d="M5 8V6a5 5 0 0 1 10 0v2M4 8h12v9H4z"/>
+            </svg>
+            Secure workflow
+          </span>
+
+        </div>
+
+
+        <div class="converter-grid">
+
+          <div class="upload-panel">
+
+            <!-- UPLOAD AREA -->
+
+            <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose image files">
+
+              <input
+                id="fileInput"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+                hidden
+              />
+
+              <div class="upload-icon">
+                <svg viewBox="0 0 32 32">
+                  <path d="M16 21V5m0 0-6 6m6-6 6 6"/>
+                  <path d="M6 19v7h20v-7"/>
+                </svg>
+              </div>
+
+              <h3>Drop your images here</h3>
+
+              <p>
+                or
+                <button class="text-button" id="browseBtn" type="button">
+                  browse files
+                </button>
+                from your device
+              </p>
+
+              <span class="file-hint">
+                JPG, PNG or WEBP · Multiple files · Maximum 10 MB each
+              </span>
+
+            </div>
+
+
+            <!-- SELECTED FILES -->
+
+            <div class="selected-file hidden" id="selectedFile">
+
+              <div class="file-thumb" id="fileThumb">
+                <span>IMG</span>
+              </div>
+
+              <div class="file-details">
+
+                <strong id="fileName">image.png</strong>
+
+                <span id="fileMeta">PNG · 0 KB</span>
+
+              </div>
+
+              <button class="icon-button" id="removeFile" type="button" aria-label="Remove selected files">
+                ×
+              </button>
+
+            </div>
+
+
+            <!-- FORMAT SELECTION -->
+
+            <div class="format-area">
+
+              <label for="outputFormat">Convert to</label>
+
+              <div class="format-select-wrap">
+
+                <select id="outputFormat">
+
+                  <option value="image/png">
+                    PNG — Portable Network Graphics
+                  </option>
+
+                  <option value="image/jpeg">
+                    JPG — JPEG Image
+                  </option>
+
+                  <option value="image/webp">
+                    WEBP — Web Image
+                  </option>
+
+                  <option value="application/pdf">
+                    PDF — Portable Document Format
+                  </option>
+
+                  <option value="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    DOCX — Microsoft Word Document
+                  </option>
+
+                </select>
+
+                <span class="select-chevron">⌄</span>
+
+              </div>
+
+              <p class="format-note">
+                Your original files stay unchanged.
+              </p>
+
+            </div>
+
+
+            <!-- CONVERT BUTTON -->
+
+            <button class="convert-button" id="convertBtn" type="button" disabled>
+
+              <span id="convertButtonText">Convert image</span>
+
+              <span class="button-arrow">→</span>
+
+            </button>
+
+            <p class="privacy-note">
+              <span>⌑</span>
+              Your files are used only for this conversion.
+            </p>
+
+          </div>
+
+
+          <!-- PREVIEW PANEL -->
+
+          <aside class="info-panel">
+
+            <div class="preview-heading">
+
+              <span>YOUR WORKSPACE</span>
+
+              <span class="live-pill">
+                <i></i> READY
+              </span>
+
+            </div>
+
+
+            <div class="preview-stage" id="previewStage">
+
+              <div class="preview-placeholder">
+
+                <div class="image-placeholder">
+                  <span>＋</span>
+                </div>
+
+                <strong>Your preview will appear here</strong>
+
+                <p>Upload an image to get started</p>
+
+              </div>
+
+            </div>
+
+
+            <div class="preview-footer">
+
+              <span>OUTPUT FORMAT</span>
+
+              <strong id="formatBadge">PNG</strong>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-wrap hidden" id="progressWrap">
+
+              <div class="progress-label">
+
+                <span id="progressText">Preparing conversion…</span>
+
+                <span id="progressPercent">0%</span>
+
+              </div>
+
+              <div class="progress-track">
+
+                <div id="progressBar"></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div class="result-card hidden" id="resultCard">
+
+              <div class="result-check">✓</div>
+
+              <div class="result-copy">
+
+                <strong>Conversion complete</strong>
+
+                <span id="resultMeta">Your file is ready.</span>
+
+              </div>
+
+              <a class="download-button" id="downloadBtn" href="#" download>
+                Download ↓
+              </a>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+
+      <!-- HOW IT WORKS -->
+
+      <section class="how-section" id="how-it-works">
+
+        <div class="how-title">
+
+          <p class="section-kicker">THREE SIMPLE STEPS</p>
+
+          <h2>From upload to done.</h2>
+
+        </div>
+
+
+        <div class="steps">
+
+          <article class="step">
+
+            <div class="step-number">01</div>
+
+            <div class="step-icon">↑</div>
+
+            <h3>Upload your images</h3>
+
+            <p>
+              Choose one or multiple JPG, PNG or WEBP images.
+            </p>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">02</div>
+
+            <div class="step-icon">⇄</div>
+
+            <h3>Choose a format</h3>
+
+            <p>
+              Select PNG, JPG, WEBP, PDF or DOCX.
+            </p>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">03</div>
+
+            <div class="step-icon">↓</div>
+
+            <h3>Download the result</h3>
+
+            <p>
+              Download your converted file instantly.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <footer>
+
+      <a class="footer-brand" href="#">
+        CloudBox Converter
+      </a>
+
+      <span>Built for a smarter cloud experience.</span>
+
+      <span>© 2026 CloudBox</span>
+
+    </footer>
+
+  </div>
+
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- JavaScript -->
+  <script src="Project.js"></script>
+
+</body>
+</html>
+```
