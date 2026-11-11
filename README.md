@@ -50,6 +50,17 @@ The project is designed to use AWS services:
 
 *Note: Cloud upload functionality depends on the configured AWS backend.*
 
+## 📸 Project Screenshots
+
+### Homepage
+![CloudBox Converter Homepage](screenshots/homepage.png)
+
+### Image Selection
+![Image Selection](screenshots/image-selection.png)
+
+### Conversion Result
+![Conversion Result](screenshots/conversion-result.png)
+
 ## 🎯 Project Objective
 
 The objective of CloudBox Converter is to provide a simple and accessible solution for converting image files without requiring users to install desktop software.
